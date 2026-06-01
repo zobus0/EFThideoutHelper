@@ -17,7 +17,12 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, pyqtSignal, QRect, QSize, QPoint
 from PyQt6.QtGui import QColor, QPalette, QPainter, QPixmap
 
-APP_DIR = Path(__file__).parent
+# When frozen by PyInstaller, data files live next to the .exe, not inside
+# the temporary unpack dir — resolve relative to the executable in that case.
+if getattr(sys, "frozen", False):
+    APP_DIR = Path(sys.executable).parent
+else:
+    APP_DIR = Path(__file__).parent
 DATA_FILE = APP_DIR / "hideout_data.json"
 USER_FILE = APP_DIR / "user_data.json"
 ASSETS_DIR = APP_DIR / "assets"

@@ -4,3 +4,10 @@ __pycache__/
 
 # Local user data (hideout level + inventory)
 user_data.json
+
+# Build artifacts (PyInstaller)
+build/
+dist/
+release/
+*.spec
+*.zip
