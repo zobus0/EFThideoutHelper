@@ -1,0 +1,6 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Local user data (hideout level + inventory)
+user_data.json
