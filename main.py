@@ -2,6 +2,7 @@
 """EFT Shelter Helper — Помощник по убежищу Escape from Tarkov"""
 
 import sys
+import re
 import json
 from pathlib import Path
 from collections import defaultdict
@@ -12,7 +13,7 @@ from PyQt6.QtWidgets import (
     QTabWidget, QScrollArea, QGridLayout, QFrame, QLabel, QPushButton,
     QSpinBox, QLineEdit, QComboBox, QTableWidget, QTableWidgetItem,
     QHeaderView, QAbstractItemView, QDialog, QMessageBox, QListWidget,
-    QGroupBox, QLayout, QSizePolicy,
+    QGroupBox, QLayout, QSizePolicy, QPlainTextEdit,
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QRect, QSize, QPoint
 from PyQt6.QtGui import QColor, QPalette, QPainter, QPixmap
@@ -27,6 +28,7 @@ DATA_FILE = APP_DIR / "hideout_data.json"
 USER_FILE = APP_DIR / "user_data.json"
 ASSETS_DIR = APP_DIR / "assets"
 IMAGES_FILE = ASSETS_DIR / "item_images.json"
+ALIASES_FILE = ASSETS_DIR / "item_aliases.json"
 
 # ── Palette ────────────────────────────────────────────────────────────────────
 C_BG      = "#0d1117"
@@ -146,6 +148,13 @@ def _parse_dep(dep_str: str):
     return None
 
 
+def _norm_item(s: str) -> str:
+    """Normalize an item name for alias matching (case/spacing/punct-insensitive)."""
+    s = s.lower().strip().replace("ё", "е")
+    s = re.sub(r'[«»"\'`()]', "", s)
+    return re.sub(r"[\s\-.]+", "", s)
+
+
 # ── Module icons (emoji fallbacks) ───────────────────────────────────────────
 MODULE_ICONS = {
     "Аварийная стена":    "🧱", "Безопасность":       "🔒",
@@ -174,9 +183,12 @@ class AppData:
         self.user_levels: Dict[str, int] = {}
         self.inventory: Dict[str, int] = {}
         self.item_images: Dict[str, str] = {}
+        self.item_aliases: Dict[str, List[str]] = {}
+        self._alias_lookup: Dict[str, str] = {}
         self._load_hideout()
         self._load_user()
         self._load_images()
+        self._load_aliases()
 
     def _load_images(self):
         if IMAGES_FILE.exists():
@@ -184,6 +196,56 @@ class AppData:
                 self.item_images = json.loads(IMAGES_FILE.read_text("utf-8"))
             except Exception:
                 self.item_images = {}
+
+    def _load_aliases(self):
+        """Build a normalized lookup: alias/canonical name → canonical name."""
+        if ALIASES_FILE.exists():
+            try:
+                self.item_aliases = json.loads(ALIASES_FILE.read_text("utf-8"))
+            except Exception:
+                self.item_aliases = {}
+        # every canonical item name resolves to itself
+        canonical = set(self.item_aliases) | set(self.item_images)
+        for m, levels in self.hideout.items():
+            for lvl in levels:
+                for it in lvl.get("items", []):
+                    if it.get("type") != "money":
+                        canonical.add(it["name"])
+        for name in canonical:
+            self._alias_lookup[_norm_item(name)] = name
+        # then aliases (don't overwrite a canonical-name match)
+        for canon, aliases in self.item_aliases.items():
+            for a in aliases:
+                self._alias_lookup.setdefault(_norm_item(a), canon)
+
+    def resolve_item(self, name: str) -> Optional[str]:
+        """Map a typed/short/english name to the canonical full name, or None."""
+        return self._alias_lookup.get(_norm_item(name))
+
+    def import_inventory_text(self, text: str) -> Tuple[Dict[str, int], List[str]]:
+        """Parse 'предмет количество' lines. Returns (imported {name: qty}, unmatched lines)."""
+        imported: Dict[str, int] = {}
+        unmatched: List[str] = []
+        for raw in text.splitlines():
+            line = raw.strip()
+            if not line:
+                continue
+            m = re.match(r"^(.+?)\s+(\d+)$", line)
+            if m:
+                name, qty = m.group(1).strip(), int(m.group(2))
+            else:
+                name, qty = line, 1
+            canon = self.resolve_item(name)
+            if canon and qty > 0:
+                # accumulate duplicates within one paste
+                imported[canon] = imported.get(canon, 0) + qty
+            else:
+                unmatched.append(line)
+        for name, qty in imported.items():
+            self.inventory[name] = qty
+        if imported:
+            self.save()
+        return imported, unmatched
 
     def icon_path(self, name: str) -> Optional[str]:
         rel = self.item_images.get(name)
@@ -1154,6 +1216,102 @@ class _ProgressBar(QWidget):
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# Import dialog (paste inventory from clipboard)
+# ═══════════════════════════════════════════════════════════════════════════════
+class ImportDialog(QDialog):
+    def __init__(self, data: AppData, parent=None):
+        super().__init__(parent)
+        self.data = data
+        self.imported_count = 0
+        self.setWindowTitle("Импорт предметов из буфера обмена")
+        self.setMinimumSize(460, 520)
+        self._build_ui()
+
+    def _build_ui(self):
+        lay = QVBoxLayout(self)
+        lay.setSpacing(8)
+
+        title = QLabel("Импорт собранных предметов")
+        title.setStyleSheet(
+            f"font-size:16px; font-weight:bold; color:{C_ACCENT}; padding:4px 0;"
+        )
+        lay.addWidget(title)
+
+        hint = QLabel(
+            "Вставьте список в формате <b>предмет&nbsp;количество</b> — по одному в строке.<br>"
+            "Можно использовать короткие или английские названия (Wires, SSD, Гайки…)."
+        )
+        hint.setWordWrap(True)
+        hint.setStyleSheet(f"color:{C_MUTED}; font-size:12px;")
+        lay.addWidget(hint)
+
+        self.edit = QPlainTextEdit()
+        self.edit.setPlaceholderText("Пучок проводов 10\nГайки 5\nSSD 1")
+        self.edit.setStyleSheet(
+            f"background:{C_BG2}; color:{C_TEXT}; border:1px solid {C_BORDER};"
+            f"border-radius:4px; padding:6px; font-family:Consolas,monospace;"
+        )
+        lay.addWidget(self.edit, 1)
+
+        # prefill from clipboard
+        cb = QApplication.clipboard()
+        if cb is not None and cb.text().strip():
+            self.edit.setPlainText(cb.text())
+
+        paste_btn = QPushButton("📋 Вставить из буфера")
+        paste_btn.clicked.connect(self._paste)
+        lay.addWidget(paste_btn, 0, Qt.AlignmentFlag.AlignLeft)
+
+        btns = QHBoxLayout()
+        ok = QPushButton("Импортировать")
+        ok.setStyleSheet(
+            f"background:#0d2d0d; color:{C_GREEN}; border:1px solid {C_GREEN};"
+            f"border-radius:4px; padding:8px 20px;"
+        )
+        ok.clicked.connect(self._do_import)
+        cancel = QPushButton("Отмена")
+        cancel.clicked.connect(self.reject)
+        btns.addStretch()
+        btns.addWidget(cancel)
+        btns.addWidget(ok)
+        lay.addLayout(btns)
+
+    def _paste(self):
+        cb = QApplication.clipboard()
+        if cb is not None:
+            self.edit.setPlainText(cb.text())
+
+    def _do_import(self):
+        text = self.edit.toPlainText()
+        if not text.strip():
+            self.reject()
+            return
+        imported, unmatched = self.data.import_inventory_text(text)
+        self.imported_count = len(imported)
+
+        lines = [f"<b>Импортировано предметов: {len(imported)}</b>"]
+        if unmatched:
+            shown = unmatched[:12]
+            tail = "" if len(unmatched) <= 12 else f"\n…и ещё {len(unmatched) - 12}"
+            lines.append(
+                f"<br><span style='color:{C_YELLOW}'>Не распознано: {len(unmatched)}</span>"
+            )
+        mb = QMessageBox(self)
+        mb.setWindowTitle("Результат импорта")
+        mb.setText("".join(lines))
+        if unmatched:
+            mb.setInformativeText(
+                "Эти строки не удалось сопоставить с предметами:\n  "
+                + "\n  ".join(unmatched[:12])
+                + ("" if len(unmatched) <= 12 else f"\n  …и ещё {len(unmatched) - 12}")
+            )
+        mb.exec()
+
+        if imported:
+            self.accept()
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Setup dialog (first-run + settings)
 # ═══════════════════════════════════════════════════════════════════════════════
 class SetupDialog(QDialog):
@@ -1177,6 +1335,17 @@ class SetupDialog(QDialog):
         sub = QLabel("0 = не построено.  Склад начинается с 1.")
         sub.setStyleSheet(f"color:{C_MUTED}; font-size:11px; margin-bottom:6px;")
         lay.addWidget(sub)
+
+        # ── import inventory from clipboard ─────────────────────────────────
+        imp_row = QHBoxLayout()
+        imp_btn = QPushButton("📋 Импорт предметов из буфера")
+        imp_btn.clicked.connect(self._import_items)
+        imp_row.addWidget(imp_btn)
+        self.imp_lbl = QLabel()
+        self.imp_lbl.setStyleSheet(f"color:{C_GREEN}; font-size:11px;")
+        imp_row.addWidget(self.imp_lbl)
+        imp_row.addStretch()
+        lay.addLayout(imp_row)
 
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
@@ -1227,6 +1396,11 @@ class SetupDialog(QDialog):
     def _reset(self):
         for m, sp in self._spins.items():
             sp.setValue(1 if m == "Склад" else 0)
+
+    def _import_items(self):
+        dlg = ImportDialog(self.data, self)
+        if dlg.exec() == QDialog.DialogCode.Accepted and dlg.imported_count:
+            self.imp_lbl.setText(f"✓ импортировано: {dlg.imported_count}")
 
     def accept(self):
         for m, sp in self._spins.items():

@@ -5,6 +5,10 @@ __pycache__/
 # Local user data (hideout level + inventory)
 user_data.json
 
+# Одноразовые скрипты генерации данных — в репозитории не нужны
+build_item_images.py
+build_item_aliases.py
+
 # Build artifacts (PyInstaller)
 build/
 dist/

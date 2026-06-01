@@ -1,0 +1,538 @@
+{
+  "DVD привод": [
+    "DVD",
+    "DVD drive"
+  ],
+  "SSD диск": [
+    "SSD",
+    "SSD drive"
+  ],
+  "WD-40 (100мл)": [
+    "WD-40",
+    "WD-40 (100ml)"
+  ],
+  "WI-FI Камера": [
+    "Камера",
+    "WI-FI Camera",
+    "Camera"
+  ],
+  "Автомобильный аккумулятор": [
+    "Авто аккум.",
+    "Car battery"
+  ],
+  "Аналоговый термометр": [
+    "Терм.",
+    "Analog thermometer",
+    "Therm."
+  ],
+  "Арамидная ткань": [
+    "Арамид",
+    "Aramid fiber fabric",
+    "Aramid"
+  ],
+  "Банка кофе Majaica": [
+    "Majaica",
+    "Can of Majaica coffee beans"
+  ],
+  "Банка с витаминами OLOLO": [
+    "Витамины",
+    "Bottle of OLOLO Multivitamins",
+    "Vitamins"
+  ],
+  "Банка с солью": [
+    "Соль",
+    "Can of white salt",
+    "Salt"
+  ],
+  "Банка с термитной смесью": [
+    "Термит",
+    "Can of thermite",
+    "Thermite"
+  ],
+  "Бинт стерильный": [
+    "Бинт",
+    "Aseptic bandage",
+    "Bandage"
+  ],
+  "Блок питания": [
+    "БП",
+    "Power supply unit",
+    "PSU"
+  ],
+  "Болты": [
+    "Bolts"
+  ],
+  "Бронзовый лев": [
+    "Лев",
+    "Bronze lion figurine",
+    "Lion"
+  ],
+  "Бутылка самогона \"Лютый Топорист\"": [
+    "Самогон",
+    "Bottle of Fierce Hatchling moonshine",
+    "Moonshine"
+  ],
+  "Бутылка физраствора": [
+    "NaCl",
+    "Bottle of saline solution"
+  ],
+  "Военная гофрированная трубка": [
+    "Гофра",
+    "Military corrugated tube",
+    "MTube"
+  ],
+  "Военный COFDM беспроводной передатчик сигналов": [
+    "SG-C10",
+    "Military COFDM Wireless Signal Transmitter"
+  ],
+  "Военный аккумулятор 6-СТЭН-140-М": [
+    "АКБ танковый",
+    "6-STEN-140-M military battery",
+    "Tank battery"
+  ],
+  "Военный кабель": [
+    "ВКабель",
+    "Military cable",
+    "MCable"
+  ],
+  "Военный фильтр питания": [
+    "ВФильтр",
+    "Military power filter",
+    "PFilter"
+  ],
+  "Военный флеш-накопитель": [
+    "В. Флешка",
+    "Military flash drive",
+    "MFD"
+  ],
+  "Воздушный фильтр для противогаза": [
+    "Фильтр",
+    "Gas mask air filter",
+    "Filter"
+  ],
+  "Гаечный ключ": [
+    "ГКлюч",
+    "Wrench"
+  ],
+  "Гайки": [
+    "Screw nuts",
+    "Nuts"
+  ],
+  "Гофрированный шланг": [
+    "ГШланг",
+    "Corrugated hose",
+    "Hose"
+  ],
+  "Датчик давления": [
+    "Датчик",
+    "Pressure gauge",
+    "PGauge"
+  ],
+  "Ежедневник": [
+    "Дневник",
+    "Diary"
+  ],
+  "Жгут Эсмарха": [
+    "Эсмарх",
+    "Esmarch tourniquet",
+    "Esmarch"
+  ],
+  "Зажигалка Crickent": [
+    "Crickent",
+    "Crickent lighter"
+  ],
+  "Зажигалка выживальщика SurvL": [
+    "SurvL",
+    "SurvL Survivor Lighter"
+  ],
+  "Защищенная кассета с магнитной пленкой": [
+    "SMT",
+    "Secure magnetic tape cassette"
+  ],
+  "Защищенный флеш-накопитель": [
+    "Флешка",
+    "Secure Flash drive",
+    "Flash drive"
+  ],
+  "Золотая цепочка": [
+    "Зол. цепь",
+    "Golden neck chain",
+    "GoldChain"
+  ],
+  "Золотое кольцо с черепом": [
+    "Череп",
+    "Gold skull ring",
+    "Skull"
+  ],
+  "Золотой петух": [
+    "Петух",
+    "Golden rooster figurine",
+    "Rooster"
+  ],
+  "Золотые часы Roler Submariner": [
+    "Roler",
+    "Roler Submariner gold wrist watch"
+  ],
+  "Зубная паста": [
+    "Зуб. паста",
+    "Toothpaste"
+  ],
+  "Изолента": [
+    "Insulating tape",
+    "Tape"
+  ],
+  "Кабелерез Bulbex": [
+    "Bulbex",
+    "Bulbex cable cutter"
+  ],
+  "Кейс для хлама": [
+    "Хлам",
+    "Lucky Scav Junk box",
+    "Junk"
+  ],
+  "Книга рецептов BakeEzy": [
+    "BakeEzy",
+    "BakeEzy cook book"
+  ],
+  "Конденсаторы": [
+    "Конд.",
+    "Capacitors",
+    "Caps"
+  ],
+  "Круглогубцы": [
+    "КГубцы",
+    "Round pliers",
+    "RPliers"
+  ],
+  "Кувалда \"Лютый удар\"": [
+    "Кувалда",
+    "Fierce Blow sledgehammer",
+    "Sledgehammer"
+  ],
+  "Кусок мыла": [
+    "Мыло",
+    "Soap"
+  ],
+  "Лампа накаливания": [
+    "Лампа",
+    "Light bulb",
+    "Bulb"
+  ],
+  "Липкая лента \"KEKТЕЙП\"": [
+    "КЕК",
+    "KEKTAPE duct tape",
+    "KEK"
+  ],
+  "Литиевая аккумуляторная батарейка GreenBat": [
+    "GreenBat",
+    "GreenBat lithium battery"
+  ],
+  "Магнит": [
+    "Magnet"
+  ],
+  "Материалы топографической разведки": [
+    "Карты",
+    "Topographic survey maps",
+    "Maps"
+  ],
+  "Медицинские инструменты": [
+    "Мед.",
+    "Medical tools",
+    "MedTools"
+  ],
+  "Монтажная пена Shustrilo": [
+    "Shus",
+    "Shustrilo sealing foam"
+  ],
+  "Монтажная пена Xenomorph": [
+    "Xeno",
+    "Xenomorph sealing foam"
+  ],
+  "Монтажный скотч": [
+    "Скотч",
+    "Duct tape"
+  ],
+  "Мультитул Leatherman": [
+    "Мультитул",
+    "Leatherman Multitool",
+    "MultiTool"
+  ],
+  "Набор для переливания крови": [
+    "Перелив.",
+    "Medical bloodset",
+    "Bloodset"
+  ],
+  "Набор для ремонта бронежилетов": [
+    "Ремкомплект для брони",
+    "Body armor repair kit",
+    "Armor repair kit"
+  ],
+  "Набор для шитья": [
+    "Красавч.",
+    "Sewing kit",
+    "Krasavch."
+  ],
+  "Набор инструментов": [
+    "Инструменты",
+    "Toolset"
+  ],
+  "Набор медикаментов": [
+    "Мед.",
+    "Pile of meds",
+    "Meds"
+  ],
+  "Набор металлических частей": [
+    "Зап.части",
+    "Metal spare parts",
+    "M.parts"
+  ],
+  "Набор напильников \"Мастер\"": [
+    "Мастер",
+    "Set of files \"Master\"",
+    "Master"
+  ],
+  "Ножницы для резки металла": [
+    "Металл",
+    "Metal cutting scissors",
+    "MScissors"
+  ],
+  "Объектив NIXXOR": [
+    "NIXXOR",
+    "NIXXOR lens"
+  ],
+  "Обычные спички": [
+    "Спички",
+    "Classic matches",
+    "Matches"
+  ],
+  "Оружейная смазка #FireKlean": [
+    "#FireKlean",
+    "#FireKlean gun lube"
+  ],
+  "Оружейные части": [
+    "Ор. части",
+    "Weapon parts",
+    "WParts"
+  ],
+  "Офтальмоскоп": [
+    "ОСкоп",
+    "Ophthalmoscope",
+    "OScope"
+  ],
+  "Охотничьи спички": [
+    "ОСпички",
+    "Hunting matches",
+    "HMatches"
+  ],
+  "Пакет саморезов": [
+    "Саморезы",
+    "Pack of screws",
+    "Screws"
+  ],
+  "Папка с разведданными": [
+    "Разведданные",
+    "Intelligence folder",
+    "Intelligence"
+  ],
+  "Пачка гвоздей": [
+    "Гвозди",
+    "Pack of nails",
+    "Nails"
+  ],
+  "Пачка соды": [
+    "Сода",
+    "Pack of sodium bicarbonate",
+    "Sodium"
+  ],
+  "Передовой блок усилителя GPS сигнала": [
+    "GPSA",
+    "Far-forward GPS Signal Amplifier Unit"
+  ],
+  "Передовой преобразователь тока": [
+    "ППТ",
+    "Advanced current converter",
+    "MCC"
+  ],
+  "Печатная плата": [
+    "Плата",
+    "Printed circuit board",
+    "PCB"
+  ],
+  "План-карта Завода": [
+    "Завод",
+    "Factory plan map",
+    "Factory"
+  ],
+  "Плоскогубцы Elite": [
+    "Elite",
+    "Pliers Elite"
+  ],
+  "Поврежденный жесткий диск": [
+    "HDD",
+    "Damaged hard drive"
+  ],
+  "Полиамидная ткань Кордура": [
+    "Кордура",
+    "Cordura polyamide fabric",
+    "Cordura"
+  ],
+  "Процессорный кулер": [
+    "Кулер",
+    "CPU fan"
+  ],
+  "Пучок проводов": [
+    "Провода",
+    "Bundle of wires",
+    "Wires"
+  ],
+  "Рабочий LCD дисплей": [
+    "LCD",
+    "Working LCD"
+  ],
+  "Реле контроля фаз": [
+    "Реле",
+    "Phase control relay",
+    "Relay"
+  ],
+  "Рулон туалетной бумаги": [
+    "ТБшка",
+    "Toilet paper",
+    "TP"
+  ],
+  "Ручная дрель": [
+    "Руч. дрель",
+    "Hand drill"
+  ],
+  "Светодиодный трансиллюминатор кожи LEDX": [
+    "LEDX",
+    "LEDX Skin Transilluminator"
+  ],
+  "Свеча зажигания": [
+    "Свеча",
+    "Spark plug",
+    "SPlug"
+  ],
+  "Силиконовая трубка": [
+    "Трубка",
+    "Silicone tube",
+    "Tube"
+  ],
+  "Силовой кабель": [
+    "Кабель",
+    "Power cord",
+    "Cord"
+  ],
+  "Спираль накаливания": [
+    "Спираль",
+    "Radiator helix",
+    "Helix"
+  ],
+  "Спрей от насекомых PAID AntiRoach": [
+    "PAID",
+    "PAID AntiRoach spray"
+  ],
+  "Средство для прочистки труб \"Копченый Дымоход\"": [
+    "КД",
+    "Smoked Chimney drain cleaner",
+    "DCleaner"
+  ],
+  "Статуэтка коня": [
+    "Конь",
+    "Horse figurine",
+    "Horse"
+  ],
+  "Статуэтка кота": [
+    "Кот",
+    "Cat figurine",
+    "Cat"
+  ],
+  "Строительная измерительная рулетка": [
+    "Рулетка",
+    "Construction measuring tape",
+    "MTape"
+  ],
+  "Сухое горючее": [
+    "СухГор",
+    "Dry fuel",
+    "DFuel"
+  ],
+  "Твердотельный накопитель VPX Flash Storage Module": [
+    "VPX",
+    "VPX Flash Storage Module"
+  ],
+  "Техническая документация": [
+    "Мануал",
+    "Tech manual",
+    "Manual"
+  ],
+  "Тонкий ежедневник": [
+    "ТДневник",
+    "Slim diary",
+    "SDiary"
+  ],
+  "Трещоточный ключ": [
+    "Трещ.",
+    "Ratchet wrench",
+    "Ratchet"
+  ],
+  "Тройник": [
+    "T-Shaped plug",
+    "T-Plug"
+  ],
+  "Тротиловая шашка ТП-200": [
+    "ТП-200",
+    "TP-200 TNT brick",
+    "TP-200"
+  ],
+  "Тюбик холодной сварки Poxeram": [
+    "Poxeram",
+    "Tube of Poxeram cold welding"
+  ],
+  "Флисовая ткань": [
+    "Флис",
+    "Fleece fabric",
+    "Fleece"
+  ],
+  "Шарнирный ключ КШС": [
+    "КШС",
+    "Pipe grip wrench",
+    "PGW"
+  ],
+  "Шило": [
+    "Awl"
+  ],
+  "Шприц в упаковке": [
+    "Шприц",
+    "Disposable syringe",
+    "Syringe"
+  ],
+  "Щелочное средство для промывки теплообменных поверхностей": [
+    "Щелочь",
+    "Alkaline cleaner for heat exchangers",
+    "Alkali"
+  ],
+  "Электродвигатель": [
+    "Двигатель",
+    "Electric motor",
+    "Motor"
+  ],
+  "Электродрель": [
+    "Дрель",
+    "Electric drill",
+    "Drill"
+  ],
+  "Элемент фазированной решетки РЛС": [
+    "ФАР",
+    "Phased array element",
+    "AESA"
+  ],
+  "Энергосберегающая лампа": [
+    "ЭСЛ",
+    "Energy-saving lamp",
+    "ES Lamp"
+  ],
+  "Ювелирная цепочка": [
+    "Цепочка",
+    "Chainlet"
+  ]
+}
